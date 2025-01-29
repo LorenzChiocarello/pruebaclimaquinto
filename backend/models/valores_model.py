@@ -4,7 +4,12 @@ class ValoresModel:
     @staticmethod
     def obtener_todos():
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM valores WHERE status = 'activo'")
+        cursor.execute("""
+            SELECT v.id, v.tipo_id, t.tipo AS tipo, v.fecha, v.valor, v.status
+            FROM valores v
+            JOIN tipos t ON v.tipo_id = t.id
+            WHERE v.status = 'activo'
+        """)
         datos = cursor.fetchall()
         cursor.close()
         return datos
@@ -40,3 +45,14 @@ class ValoresModel:
         mysql.connection.commit()
         cursor.close()
         return True
+    
+class TiposModel:
+    @staticmethod
+    def obtener_todos():
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT id, tipo FROM tipos")  # Suponiendo que hay una tabla 'tipos' con 'id' y 'nombre'
+        datos = cursor.fetchall()
+        cursor.close()
+        return datos
+
+

@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from models.valores_model import ValoresModel
+from models.valores_model import ValoresModel, TiposModel
 
 def obtener_valores():
     valores = ValoresModel.obtener_todos()
@@ -22,3 +22,7 @@ def actualizar_valor(id):
 def desactivar_valor(id):
     ValoresModel.desactivar(id)
     return jsonify({'mensaje': 'Valor desactivado'})
+
+def obtener_tipos():
+    tipos = TiposModel.obtener_todos()  # Usamos el método del modelo para obtener los tipos
+    return jsonify(tipos)  # Devolvemos los tipos en formato JSON
