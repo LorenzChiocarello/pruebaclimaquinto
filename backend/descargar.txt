@@ -1,0 +1,30 @@
+pip install flask flask-mysqldb
+
+python app.py
+
+
+CREATE DATABASE pruebaclimaquinto;
+USE pruebaclimaquinto;
+
+CREATE TABLE tipos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(50)
+);
+
+CREATE TABLE valores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_id INT,
+    fecha DATE,
+    valor DECIMAL(10,2),
+    status VARCHAR(20), 
+    FOREIGN KEY (tipo_id) REFERENCES tipos(id)
+);
+
+INSERT INTO tipos (tipo) VALUES ('Temperatura'), ('Humedad');
+
+INSERT INTO valores (tipo_id, fecha, valor, status)
+VALUES
+    (1, '2023-11-22', 25.5, 'activo'),
+    (1, '2023-11-23', 22.8, 'activo'),
+    (2, '2023-11-22', 65.3, 'activo'),
+    (2, '2023-11-23', 72.1, 'activo');
