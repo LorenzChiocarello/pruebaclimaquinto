@@ -9,5 +9,5 @@ valores_bp.route('/valores', methods=['POST'])(agregar_valor)
 valores_bp.route('/valores/<int:id>', methods=['PUT'])(actualizar_valor)
 valores_bp.route('/valores/<int:id>/desactivar', methods=['PUT'])(desactivar_valor)
 
-valores_bp.route('/tipos', methods=['GET'])(obtener_tipos)  # Ruta para obtener los tipos
+valores_bp.route('/tipos', methods=['GET'])(obtener_tipos) 
 
