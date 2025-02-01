@@ -1,27 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { getValores, desactivarValor } from '../api/axios';
+import React from 'react';
+import { desactivarValor } from '../api/axios';
 import './ValoresList.css';
 
-const ValoresList = ({ onEdit }) => {
-  const [valores, setValores] = useState([]);
-
-  useEffect(() => {
-    loadValores();
-  }, []);
-
-  const loadValores = async () => {
-    try {
-      const response = await getValores();
-      setValores(response.data);
-    } catch (error) {
-      console.error('Error loading valores:', error);
-    }
-  };
-
+const ValoresList = ({ valores, onEdit, onValoresChange }) => {
   const handleDesactivar = async (id) => {
     try {
       await desactivarValor(id);
-      loadValores();
+      onValoresChange();
     } catch (error) {
       console.error('Error desactivating valor:', error);
     }
